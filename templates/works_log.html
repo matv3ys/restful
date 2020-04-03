@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 align="center">Works log</h3> <br/>
+{% if current_user.is_authenticated %}
+    <a href="addjob" class="btn btn-secondary">Add job</a>
+{% endif %}
+{% for item in jobs%}
+<div>
+    <h5>Action #{{item.id}}</h5>
+    <div>
+        <table border="1" width="100%">
+           <tr>
+               <td width="20%">Title of activity</td>
+               <td width="15%">Team leader</td>
+               <td width="15%">Duration</td>
+               <td width="15%">List of collaborators</td>
+               <td width="20%">Hazard category</td>
+               <td width="15%">Is finished</td>
+           </tr>
+            <tr>
+               <td>{{item.job}}</td>
+               <td>{{item.user.surname}} {{item.user.name}}</td>
+               <td>{{item.work_size}} hours</td>
+               <td>{{item.collaborators}}</td>
+                <td>{{item.categories[0].name}}</td>
+               {% if item.is_finished %}
+                <td>Is finished</td>
+               {% else %}
+                <td>Is not finished</td>
+               {% endif %}
+           </tr>
+        </table>
+    </div>
+    {% if current_user.is_authenticated and (current_user.id == item.creator or current_user.id == 1) %}
+        <div>
+            <a href="/addjob/{{ item.id }}" class="btn btn-warning">Edit</a>
+            <a href="/job_delete/{{ item.id }}" class="btn btn-danger">Delete</a>
+        </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
