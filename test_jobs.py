@@ -1,0 +1,56 @@
+from requests import get, post, delete, put
+
+print('Тест 1: получение списка работ')
+print(get('http://localhost:5000/api/v2/jobs').json())
+print()
+print('Тест 2: добавление новой работы')
+print(post('http://localhost:5000/api/v2/jobs', json={'job': 'testjob',
+                                                      'team_leader': 7,
+                                                      'work_size': 14,
+                                                      'collaborators': '3, 6',
+                                                      'is_finished': False}).json())
+print()
+print('Тест 3: добавление работы с пустым запросом')
+print(post('http://localhost:5000/api/v2/jobs').json())
+print()
+print('Тест 4: добавление работы с неполным набором аргументов')
+print(post('http://localhost:5000/api/v2/jobs', json={'job': 'testjob',
+                                                      'team_leader': 7,
+                                                      'collaborators': '3, 6',
+                                                      'is_finished': False}).json())
+print()
+print('Список работ после 2,3,4 тестов')
+print(get('http://localhost:5000/api/v2/jobs').json())
+print()
+print('Тест 5: удаление последней добавленной работы')
+print(delete('http://localhost:5000/api/v2/jobs/8').json())  # 8 - id последней работы в моей БД
+print()
+print('Тест 6: удаление работы (вместо id - строка)')
+print(delete('http://localhost:5000/api/v2/jobs/q').json())
+print()
+print('Тест 7: удаление работы (несуществующий id)')
+print(delete('http://localhost:5000/api/v2/jobs/121').json())
+print()
+print('Список работ после 5,6,7 тестов')
+print(get('http://localhost:5000/api/v2/jobs').json())
+print()
+print('Тест 8: получение одной работы')
+print(get('http://localhost:5000/api/v2/jobs/1').json())
+print()
+print('Тест 9: получение одной работы (вместо id - строка)')
+print(get('http://localhost:5000/api/v2/jobs/q').json())
+print()
+print('Тест 10: получение одной работы (несуществующий id)')
+print(get('http://localhost:5000/api/v2/jobs/122').json())
+print()
+print('Тест 11: Редактируем работу из теста 8')
+print(put('http://localhost:5000/api/v2/jobs/1', json={'work_size': 33}).json())
+print()
+print('Тест 12: Редактируем работу (вместо id - строка)')
+print(put('http://localhost:5000/api/v2/jobs/q', json={'work_size': 89}).json())
+print()
+print('Тест 13: Редактируем работу (несуществующий id))')
+print(put('http://localhost:5000/api/v2/jobs/123', json={'work_size': 89}).json())
+print()
+print('Работа из теста 11 после редактирования')
+print(get('http://localhost:5000/api/v2/jobs/1').json())
