@@ -1,5 +1,6 @@
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
 association_table = sqlalchemy.Table('association', SqlAlchemyBase.metadata,
@@ -10,7 +11,7 @@ association_table = sqlalchemy.Table('association', SqlAlchemyBase.metadata,
 )
 
 
-class CategoryNews(SqlAlchemyBase):
+class CategoryNews(SqlAlchemyBase, SerializerMixin):
 
     __tablename__ = 'category'
 

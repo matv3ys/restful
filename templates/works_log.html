@@ -11,11 +11,10 @@
     <div>
         <table border="1" width="100%">
            <tr>
-               <td width="20%">Title of activity</td>
+               <td width="30%">Title of activity</td>
                <td width="15%">Team leader</td>
                <td width="15%">Duration</td>
-               <td width="15%">List of collaborators</td>
-               <td width="20%">Hazard category</td>
+               <td width="25%">List of collaborators</td>
                <td width="15%">Is finished</td>
            </tr>
             <tr>
@@ -23,7 +22,6 @@
                <td>{{item.user.surname}} {{item.user.name}}</td>
                <td>{{item.work_size}} hours</td>
                <td>{{item.collaborators}}</td>
-                <td>{{item.categories[0].name}}</td>
                {% if item.is_finished %}
                 <td>Is finished</td>
                {% else %}

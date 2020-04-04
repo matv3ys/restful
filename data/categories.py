@@ -1,5 +1,6 @@
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
 association_table = sqlalchemy.Table('jobs_to_category', SqlAlchemyBase.metadata,
@@ -10,7 +11,7 @@ association_table = sqlalchemy.Table('jobs_to_category', SqlAlchemyBase.metadata
 )
 
 
-class CategoryJob(SqlAlchemyBase):
+class CategoryJob(SqlAlchemyBase, SerializerMixin):
 
     __tablename__ = 'job_category'
 
